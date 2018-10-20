@@ -14,7 +14,7 @@ const rowHeight1 = {
 };
 
 const rowHeight2 = {
-    height: "7%"
+    height: "20%"
 };
 export default class Login extends Component {
     constructor() {

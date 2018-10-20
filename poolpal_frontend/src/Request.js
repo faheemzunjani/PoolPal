@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './css/Login.module.css';
+import './index.css'
 import {
     MediaBox,
     Navbar,
@@ -54,22 +55,82 @@ export default class Login extends Component {
         })
         this.props.history.goBack()
     }
+    componentDidMount() {
+        let map = new window.google.maps.Map(document.getElementById('map'), {
+            center: { lat: 25.4358, lng: 81.8463 },
+            zoom: 13,
+            mapTypeId: 'roadmap',
+        });
 
+        // var directionsService = new window.google.maps.DirectionsService();
+        // var directionsDisplay = new window.google.maps.DirectionsRenderer();
+        // var chicago = new window.google.maps.LatLng(41.850033, -87.6500523);
+        // var mapOptions = {
+        //   zoom:7,
+        //   center: chicago
+        // }
+        // let map = new window.google.maps.Map(document.getElementById('map'), mapOptions);
+        // directionsDisplay.setMap(map);
+
+        // this.calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+
+        map.addListener('zoom_changed', () => {
+            this.setState({
+                zoom: map.getZoom(),
+            });
+        });
+
+        map.addListener('maptypeid_changed', () => {
+            this.setState({
+                maptype: map.getMapTypeId(),
+            });
+        });
+
+        let marker = new window.google.maps.Marker({
+            map: map,
+            position: { lat: 25.4358, lng: 81.8463 },
+        });
+
+        // initialize the autocomplete functionality using the #pac-input input box
+        let inputNode = document.getElementById('pac-input');
+        // map.controls[window.google.maps.ControlPosition.TOP_LEFT].push(inputNode);
+        let autoComplete = new window.google.maps.places.Autocomplete(inputNode);
+
+        autoComplete.addListener('place_changed', () => {
+            let place = autoComplete.getPlace();
+            let location = place.geometry.location;
+
+            this.setState({
+                place_formatted: place.formatted_address,
+                place_id: place.place_id,
+                place_location: location.toString(),
+            });
+
+            console.log(this.state.place_formatted + " " + this.state.place_id + " " + this.state.place_location)
+
+            // bring the selected place in view on the map
+            map.fitBounds(place.geometry.viewport);
+            map.setCenter(location);
+
+            marker.setPlace({
+                placeId: place.place_id,
+                location: location,
+            });
+        });
+    }
     render() {
         return (
-            <div>
+            <div id="app">
                 <Navbar brand="New Request" right className="grey darken-4">
-                    <NavItem href={'/home/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>Profile</NavItem>
+                    <NavItem href={'/home/' + this.props.match.params.id + '/' + this.props.match.params.pwd}>Profile</NavItem>
                     <NavItem href={'/'}>Logout</NavItem>
-                    <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>
+                    <NavItem href={'/myrequests/' + this.props.match.params.id + '/' + this.props.match.params.pwd}>My Requests</NavItem>
                 </Navbar>
                 <Row style={rowHeight3} />
                 <form onSubmit={this.requestsend}>
                     <Row>
                         <Col s={10} offset="s1">
-                            <Col s={12}>
-                                <label>Area</label>
-                            </Col>
                             <Input s={12} type="select" defaultValue="" id="area">
                                 <option value="" disabled>
                                     Pick Area
@@ -81,21 +142,16 @@ export default class Login extends Component {
                         </Col>
 
                         <Col s={10} offset="s1">
-                            <Col s={12}>
-                                <label>Request expires after</label>
-                            </Col>
                             <Input
                                 s={12}
                                 name="on"
                                 type="time"
                                 id="time"
+                                placeholder="Request expires after"
                                 onChange={function (e, value) { }}
                             />
                         </Col>
                         <Col s={10} offset="s1">
-                            <Col s={12}>
-                                <label>Item Required</label>
-                            </Col>
                             <Input
                                 s={12}
                                 id="item"
@@ -104,17 +160,22 @@ export default class Login extends Component {
                                 placeholder="Enter item required"
                             />
                         </Col>
+                    </Row>
+                    <Row>
                         <Col s={10} offset="s1">
                             <Col s={12}>
-                                <label>Additional Instructions</label>
+                            <div id='pac-container'>
+                                <input id='pac-input' type='text' placeholder='Enter a location' />
+                            </div>
                             </Col>
-                            <Input
-                                s={12}
-                                id="description"
-                                type="text"
-                                className="validate"
-                                placeholder="Enter additional instructions"
-                            />
+                        </Col>
+                    </Row>
+                    <Row></Row>
+                    <Row>
+                        <Col s={10} offset="s1">
+                            <Col s={12}>
+                                <div id="map"></div>
+                            </Col>  
                         </Col>
                     </Row>
                     <Row style={rowHeight4}>
