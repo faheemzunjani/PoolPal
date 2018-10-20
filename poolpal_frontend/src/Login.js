@@ -46,7 +46,7 @@ export default class Login extends Component {
                 <Row>
                     <Col s={4} offset="s4" className="blue-grey lighten-5 center-align">
                         <MediaBox
-                            src="/images/icon.png"
+                            src="https://raw.githubusercontent.com/faheemzunjani/PoolPal/master/poolpal_frontend/src/images/icon.png"
                             className="circle valign-wrapper responsive-img"
                         />
                     </Col>

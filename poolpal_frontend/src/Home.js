@@ -68,7 +68,7 @@ export default class Home extends Component {
                 <Row>
                     <Col s={4} offset="s4" className="center-align">
                         <MediaBox
-                            src="./images/user.png"
+                            src="https://raw.githubusercontent.com/faheemzunjani/PoolPal/master/poolpal_frontend/src/images/user.png"
                             caption="User"
                             className="circle responsive-img"
                         />

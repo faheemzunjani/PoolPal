@@ -126,7 +126,6 @@ app.get('/notifications/:emailid',function(req,res){
             result.push(requestmap[i])
         }
     }
-    console.log(result)
     res.send({"result":result})
 })
 
@@ -165,7 +164,6 @@ app.get('/confirmations/:emailid',function(req,res){
             result.push(requestmap[i])
         }
     }
-    console.log(result)
     res.send({"result":result})
 })
 
@@ -192,7 +190,21 @@ app.get('/endtrip/:emailid',function(req,res){
     procurermap.splice(i,1);
 })
 
-
+app.get('/getotp/:reqid',function(req,res){
+    var id = req.params.reqid
+    var l = requestmap.length
+    var i
+    var otp
+    for(i = 0 ; i < l ; i++)
+    {
+        if(requestmap[i].request_id==id)
+        {
+            otp = requestmap[i].otp
+            break
+        }
+    }
+    res.send({"result":otp})
+})
 
 
 

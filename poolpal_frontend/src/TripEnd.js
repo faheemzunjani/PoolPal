@@ -37,6 +37,7 @@ export default class HospitalRecords extends Component{
         super(props)
         //this.getPatientList = this.getPatientList.bind(this)
         this.getAcceptedRequests = this.getAcceptedRequests.bind(this)
+        this.requestfinish = this.requestfinish.bind(this)
         this.state = {
 
         }
@@ -66,6 +67,31 @@ export default class HospitalRecords extends Component{
         var rec = JSON.stringify(item)
         let response = fetch(`http://localhost:5000/requestAccepted/${this.props.match.params.id}/${rec}`)
     }
+    async requestfinish(record)
+    {
+        let response = await fetch(`http://localhost:5000/getotp/${record.request_id}`)
+        let resp_json = await response.json()
+        var act_otp = resp_json.result
+        var otp = document.getElementById('otp').value
+        console.log(act_otp);
+        console.log(otp);
+        if(act_otp==otp)
+        {
+            alert(`${record.depositedAmount} has been transferred into your account`)
+            this.props.history.goBack()
+            this.props.history.goBack()
+        }
+        else{
+            while(act_otp!=otp)
+            {
+                var totp = prompt("Please enter the correct otp")
+                otp = totp
+            }
+            alert(`${record.depositedAmount} has been transferred into your account`)
+            this.props.history.goBack()
+            this.props.history.goBack()
+        }
+    }
 
     renderList(record){
         return(
@@ -75,9 +101,26 @@ export default class HospitalRecords extends Component{
             <div>
                 <Modal
                     header={record.item}
-                    actions={
-                        <div>
-                            <Button
+                    trigger={
+                        <Button className="white black-text">{record.item}</Button>
+                    }
+                >
+                    <p>
+                        <Row>
+                        <Col s={10} offset="s1">
+                            <Col s={12}>
+                                <label>OTP</label>
+                            </Col>
+                            <Input
+                                s={12}
+                                id="otp"
+                                type="text"
+                                className="validate"
+                                placeholder="Enter OTP"
+                            />
+                        </Col>
+                        </Row>
+                        {/* <Button
                                 onClick={() => this.modifylist(record)}
                                 flat
                                 modal="close"
@@ -85,50 +128,17 @@ export default class HospitalRecords extends Component{
                                 className="grey-text text-darken-4"
                             >
                                 Finish
-                </Button>
-                            <Button
+                        </Button> */}
+                        <Button
+                                onClick={() => this.requestfinish(record)}
                                 flat
                                 modal="close"
                                 waves="light"
                                 className="grey-text text-darken-4"
                             >
-                                Dismiss
-                </Button>
-                        </div>
-                    }
-                    trigger={
-                        <Button className="white black-text">{record.item}</Button>
-                    }
-                >
-                    <p>
-                    <form onSubmit={this.requestsend}>
-                        <Row>
-                        <Col s={10} offset="s1">
-                            <Col s={12}>
-                                <label>Amount Paid</label>
-                            </Col>
-                            <Input
-                                s={12}
-                                id="item"
-                                type="text"
-                                className="validate"
-                                placeholder="Enter amount paid"
-                            />
-                        </Col>
-                        <Col s={10} offset="s1">
-                            <Col s={12}>
-                                <label>OTP</label>
-                            </Col>
-                            <Input
-                                s={12}
-                                id="description"
-                                type="text"
-                                className="validate"
-                                placeholder="Enter OTP"
-                            />
-                        </Col>
-                        </Row>
-                    </form>
+                                Finish
+                        </Button>
+
                     </p>
                 </Modal>
                 <Row style={filler4} />
