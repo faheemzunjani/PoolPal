@@ -10,43 +10,51 @@
     
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
 </head>
 <body class="blue-grey lighten-5">
+    <nav>
+        <div class="nav-wrapper grey darken-4">
+            <a href="#" class="brand-logo"><h5>Requests</h5></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+            
+            <ul class="sidenav" id="mobile-demo">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
-        <div class="row" style="height: 10%"></div>
-        <div class="row" style="overflow: auto; height: 60%">
-            <div class="col s8 offset-s2">
-                <div class="card">
-                    <div class="card-content center-align">
-                        <span class="card-title activator grey-text text-darken-4">Product Title</span>
+        <div class="row" style="height: 5%"></div>
+        <div class="row" style="overflow: auto; height: 50%">
+            <div class="col s8 offset-s2 center-align">
+                <a class="waves-effect waves-light btn modal-trigger white black-text" href="#modal1">Product Title</a>
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4>Product Title</h4>
+                        <p>Product Description</p>
                     </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i>Product Title</span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
                     </div>
                 </div>
             </div>
-
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-            <div id="modal1" class="modal">
-                <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                </div>
-            </div>
+            <div class="row" style="height: 10%"></div>
         </div>
         <div class="row" style="height: 2%"></div>
         <div class="row">
             <div class="col s12 center-align">
-                <a class="waves-effect waves-light btn-small"><i class="material-icons right">done_outline</i>View Accepted</a>
+                <a class="waves-effect waves-light btn-small grey darken-4"><i class="material-icons left">done_outline</i>View Accepted</a>
             </div>
         </div>
         <div class="row">
             <div class="col s12 center-align">
-                <a class="waves-effect waves-light btn-small"><i class="material-icons left">add_circle_outline</i>End Trip</a>                    
+                <a class="waves-effect waves-light btn-small grey darken-4"><i class="material-icons left">location_off</i>End Trip</a>                    
             </div>
         </div>
     </div>
