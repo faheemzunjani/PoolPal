@@ -45,6 +45,7 @@ const rowHeight4 = {
 <div className="blue-grey lighten-5">
         <Navbar brand="New Request" right className="grey darken-4">
           <NavItem href="#">Profile</NavItem>
+          <NavItem href="#">Opened Requests</NavItem>
           <NavItem href="#">Logout</NavItem>
         </Navbar>
         <Row style={rowHeight3} />
