@@ -10,9 +10,9 @@ import {
   Input,
   MediaBox,
   Card,
-  CardTitle
+  CardTitle,
+  Modal
 } from "react-materialize";
-import Modal from "./Modal.js";
 import Child from "./Child.js";
 import "./style.css";
 
@@ -22,8 +22,23 @@ const parent = {
   width: "190px"
 };
 const body = {
-  display: "none",
-  color: "#fafafa"
+  display: "none"
+};
+
+const rowHeight1 = {
+  height: "15%"
+};
+
+const rowHeight2 = {
+  height: "7%"
+};
+
+const rowHeight3 = {
+  height: "2%"
+};
+
+const rowHeight4 = {
+  height: "24%"
 };
 const filler1 = {
   height: "20%"
@@ -31,7 +46,18 @@ const filler1 = {
 const filler2 = {
   height: "15%"
 };
-
+const filler3 = {
+  height: "5%"
+};
+const filler4 = {
+  height: "10%"
+};
+const filler5 = {
+  height: "2%"
+};
+const req_queue_style = {
+  overflow: "auto"
+};
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -124,41 +150,64 @@ class App extends React.Component {
     const isEnabled = this.state.name.length > 0;
     return (
       <div className="blue-grey lighten-5">
-        <Navbar brand="Profile" right className="grey darken-4">
+        <Navbar brand="Opened Requests" right className="grey darken-4">
           <NavItem href="#">Profile</NavItem>
           <NavItem href="#">Opened Requests</NavItem>
           <NavItem href="#">Logout</NavItem>
         </Navbar>
         <Row>
-          <Col s={12} style={filler1} />
+          <Col s={12} style={filler3} />
         </Row>
-        <Row>
-          <Col s={4} offset="s4" className="center-align">
-            <MediaBox
-              src="https://raw.githubusercontent.com/faheemzunjani/PoolPal/master/images/user.png"
-              caption="A demo media box1"
-              className="circle responsive-img"
-            />
-          </Col>
+        <Row style={req_queue_style}>
           <Col s={8} offset="s2" className="center-align">
-            <h5 className="grey-text text-darken-4">John Doe</h5>
+            <Modal
+              header="Product Title"
+              actions={
+                <div>
+                  <Button
+                    flat
+                    modal="close"
+                    waves="light"
+                    className="grey-text text-darken-4"
+                  >
+                    Accept
+                  </Button>
+                  <Button
+                    flat
+                    modal="close"
+                    waves="light"
+                    className="grey-text text-darken-4"
+                  >
+                    Dismiss
+                  </Button>
+                </div>
+              }
+              trigger={
+                <Button className="white black-text">Product Title</Button>
+              }
+            >
+              <p>Product Description</p>
+            </Modal>
+            <Row style={filler4} />
           </Col>
         </Row>
-        <Row style={filler2} />
-        <Row>
-          <Col s={12} className="center-align">
-            <Button waves="light" className="grey darken-4">
-              button<Icon left>add_circle_outline</Icon>
-            </Button>
-            <Button waves="light" className="grey darken-4">
-              button<Icon right>done_outline</Icon>
-            </Button>
-          </Col>
-        </Row>
+        <Row style={filler5} />
       </div>
     );
   }
 }
 
 render(<App />, document.getElementById("root"));
-
+/* How i updated component
+ <Row>
+            <Input s={6} placeholder={this.state.msg}
+              ref='newText'
+              onChange={this.handleChangeMsg}
+              className={this.state.cssFieldName} />
+            <Input type="email" placeholder={this.state.txt} s={12} value={this.state.text}
+              onChange={this.handleChangeTxt}
+              className={this.state.cssFieldText} />
+            <button onClick={this.save.bind(this, this.state.msg, this.state.id, this.state.txt)}>
+              save
+                </button>
+          </Row>*/

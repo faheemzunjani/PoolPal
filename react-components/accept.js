@@ -138,6 +138,7 @@ class App extends React.Component {
       <div className="blue-grey lighten-5">
         <Navbar brand="Requests" right className="grey darken-4">
           <NavItem href="#">Profile</NavItem>
+          <NavItem href="#">Opened Requests</NavItem>
           <NavItem href="#">Logout</NavItem>
         </Navbar>
         <Row>
