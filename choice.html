@@ -1,34 +1,50 @@
 <html>
-    <head>
-        <!--Import Google Icon Font-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-        <!--JavaScript at end of body for optimized loading-->
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-    </head>
-    <body class="blue-grey lighten-5">
-        <div class="container">
-            <div class="row" style="height: 20%"></div>
-            <div class="row">
-                <div class="col s4 offset-s4">
-                    <img src="images/user.png" class="circle responsive-img">
-                </div>
-                <div class="col s8 offset-s2 center-align">
-                    <h5 class="grey-text text-darken-4">John Doe</h5>
-                </div>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+</head>
+<body class="blue-grey lighten-5">
+    <nav>
+        <div class="nav-wrapper grey darken-4">
+            <a href="#" class="brand-logo"><h5>Profile</h5></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+            
+            <ul class="sidenav" id="mobile-demo">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row" style="height: 20%"></div>
+        <div class="row">
+            <div class="col s4 offset-s4">
+                <img src="images/user.png" class="circle responsive-img">
             </div>
-            <div class="row" style="height: 15%"></div>
-            <div class="row">
-                <div class="col s12 center-align">
-                    <a class="waves-effect waves-light btn-small grey darken-4"><i class="material-icons left">add_circle_outline</i>Request</a>
-                    <a class="waves-effect waves-light btn-small grey darken-4"><i class="material-icons right">done_outline</i>Accept</a>
-                </div>
+            <div class="col s8 offset-s2 center-align">
+                <h5 class="grey-text text-darken-4">John Doe</h5>
             </div>
         </div>
-    </body>
+        <div class="row" style="height: 15%"></div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <a class="waves-effect waves-light btn-small grey darken-4"><i class="material-icons left">add_circle_outline</i>Request</a>
+                <a class="waves-effect waves-light btn-small grey darken-4"><i class="material-icons right">done_outline</i>Accept</a>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
