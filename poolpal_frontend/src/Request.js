@@ -59,8 +59,9 @@ export default class Login extends Component {
         return (
             <div>
                 <Navbar brand="New Request" right className="grey darken-4">
-                    <NavItem href="#">Profile</NavItem>
-                    <NavItem href="#">Logout</NavItem>
+                    <NavItem href={'/home/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>Profile</NavItem>
+                    <NavItem href={'/'}>Logout</NavItem>
+                    <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>
                 </Navbar>
                 <Row style={rowHeight3} />
                 <form onSubmit={this.requestsend}>

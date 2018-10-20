@@ -186,7 +186,7 @@ export default class HospitalRecords extends Component{
                 <Navbar brand="Accepted Requests" right className="grey darken-4">
                 <NavItem href={'/home/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>Profile</NavItem>
                     <NavItem href={'/'}>Logout</NavItem>
-                    <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>
+                    <NavItem href="#">My Requests</NavItem>
                 </Navbar>
                 <Row>
                     <Col s={12} style={filler3} />
@@ -206,7 +206,7 @@ export default class HospitalRecords extends Component{
             <Navbar brand="Accepted Requests" right className="grey darken-4">
             <NavItem href={'/home/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>Profile</NavItem>
                     <NavItem href={'/'}>Logout</NavItem>
-                    <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>
+                    <NavItem href="#">My Requests</NavItem>
             </Navbar>
             <Row>
                 <Col s={12} style={filler5} />

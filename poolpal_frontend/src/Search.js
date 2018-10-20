@@ -5,6 +5,7 @@ import Login from './Login'
 import Request from './Request'
 import TripView from './TripView'
 import TripEnd from './TripEnd'
+import MyRequests from './MyRequests'
 
 
 export default class Search extends Component {
@@ -38,6 +39,7 @@ export default class Search extends Component {
             <Route exact path='/request/:id/:pwd' component={Request}/>
             <Route exact path='/tripview/:id' component={TripView} />
             <Route exact path='/tripend/:id' component={TripEnd} />
+            <Route exact path='/myrequests/:id/:pwd' component={MyRequests}/>
             </div>
         )
     }

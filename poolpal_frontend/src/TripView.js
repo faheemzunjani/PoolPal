@@ -11,7 +11,9 @@ import {
     MediaBox,
     Card,
     CardTitle,
-    Modal
+    Modal,
+    Collapsible,
+    CollapsibleItem
 } from "react-materialize";
 const filler1 = {
     height: "20%"
@@ -23,7 +25,7 @@ const filler3 = {
     height: "5%"
 };
 const filler4 = {
-    height: "10%"
+    height: "0.02%"
 };
 const filler5 = {
     height: "2%"
@@ -31,6 +33,9 @@ const filler5 = {
 const req_queue_style = {
     overflow: "auto"
 };
+const fullwidthbutton = {
+    width:"100%"
+}
 export default class HospitalRecords extends Component {
     constructor(props) {
         super(props)
@@ -110,12 +115,22 @@ export default class HospitalRecords extends Component {
                         </div>
                     }
                     trigger={
-                        <Button className="white black-text">{record.item}</Button>
+                        <Button style={fullwidthbutton} className="white black-text">{record.item}</Button>
                     }
                 >
                     <p>Requester Name:{record.id}</p>
                 </Modal>
-                <Row style={filler4} />
+                <Row></Row>
+                {/* <CollapsibleItem header="Product Title">
+                <p>Requestor:{record.id} </p>
+                <p>Area:{record.area} </p>
+                <p>Description:{record.item}</p>
+                <p>Location: </p>
+                <div> Insert Map here </div>
+                <Button onClick={() => this.modifylist(record)} waves="light" className="grey darken-4">
+                  Accept
+                </Button>
+              </CollapsibleItem> */}
             </div>
 
         )
@@ -145,14 +160,16 @@ export default class HospitalRecords extends Component {
             return (
                 <div>
                     <Navbar brand="Requests" right className="grey darken-4">
-                        <NavItem href="#">Profile</NavItem>
-                        <NavItem href="#">Logout</NavItem>
+                    <NavItem href={'/home/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>Profile</NavItem>
+                    <NavItem href={'/'}>Logout</NavItem>
+                    <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>
                     </Navbar>
                     <Row>
                         <Col s={12} style={filler3} />
                     </Row>
                     <Row style={req_queue_style}>
-                        <Col s={8} offset="s2" className="center-align">
+                        <Col s={10} offset="s1" className="center-align">
+             
                             <ul>
                                 {this.state.list.map((record) => this.renderList(record))}
                             </ul>
@@ -179,13 +196,9 @@ export default class HospitalRecords extends Component {
                 <Navbar brand="Requests" right className="grey darken-4">
                     <NavItem href="#">Profile</NavItem>
                     <NavItem href="#">Logout</NavItem>
+                    <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>
                 </Navbar>
                 <Row>
-                    <Col s={12} className="center-align">
-                        <Button waves="light" className="grey darken-4">
-                            View Accepted<Icon left>done_outline</Icon>
-                        </Button>
-                    </Col>
                     <Col s={12} style={filler5} />
                     <Col s={12} className="center-align">
                         <Button onClick={this.tripEnd} waves="light" className="grey darken-4">
