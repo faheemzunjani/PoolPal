@@ -51,7 +51,7 @@ export default class Home extends Component {
 
     requestClick(e) {
         e.preventDefault();
-        this.props.history.push(`/request/${this.props.match.params.id}/${this.props.match.params.pwd}`)
+        alert("Seems like we ran out of time")
     }
     initiateTrip(e) {
         e.preventDefault();
@@ -64,7 +64,12 @@ export default class Home extends Component {
 
     }
     componentDidMount() {
-        var El_chico = {lat: 25.45072529999999, lng: 81.8336951};
+        var El_chico = {lat: 25.45072529999999, lng: 81.8436951};
+        var b = {lat: 25.4494528, lng: 81.83953629999996};
+        var c = {lat: 25.45127089999999, lng: 81.81293490000005};
+        var d = {lat: 25.4545927, lng: 81.83478179999997};
+        var e = {lat: 25.4595927, lng: 81.85478179999997};
+        
         var place = new window.google.maps.LatLng(25.45072529999999, 81.8336951);
         let map = new window.google.maps.Map(document.getElementById('map'), {
           center: {lat: 25.45072529999999, lng: 81.8336951},
@@ -79,19 +84,25 @@ export default class Home extends Component {
           position: El_chico,
         });
         
-        var i = 1
-    
-        map.addListener('click', function(event) {
-          console.log("##" + event.latLng)
-          if(i < 7) {
-            let marker = new window.google.maps.Marker({
-              map: map,
-              position: event.latLng,
-            });
-            i = i + 1
-          }
+        marker = new window.google.maps.Marker({
+          map: map,
+          position: b,
         });
     
+        marker = new window.google.maps.Marker({
+          map: map,
+          position: c,
+        });
+    
+        marker = new window.google.maps.Marker({
+          map: map,
+          position: d,
+        });
+    
+        marker = new window.google.maps.Marker({
+          map: map,
+          position: e,
+        });
       }
     
     render() {

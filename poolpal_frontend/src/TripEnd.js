@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import Rating from 'react-rating'
 import {
     Button,
     Icon,
@@ -75,11 +76,13 @@ export default class HospitalRecords extends Component{
         let resp_json = await response.json()
         var act_otp = resp_json.result
         var otp = document.getElementById('otp').value
+        var rating = document.getElementById('rate').value
         console.log(act_otp);
         console.log(otp);
         if(act_otp==otp)
         {
             alert(`${record.depositedAmount} has been transferred into your account`)
+            let r = fetch(`http://192.168.0.2:5000/storerating/${record.id}/${rating}`)
             this.props.history.goBack()
             this.props.history.goBack()
         }
@@ -104,7 +107,28 @@ export default class HospitalRecords extends Component{
                 <Modal
                     header={record.item}
                     trigger={
-                        <Button className="white black-text">{record.item}</Button>
+                        <Button style={fullwidthbutton} className="white black-text">{record.item}</Button>
+                    }
+                    actions={
+                        <div>
+                            <Button
+                                onClick={() => this.requestfinish(record)}
+                                flat
+                                modal="close"
+                                waves="light"
+                                className="grey-text text-darken-4"
+                            >
+                                Finish
+                </Button>
+                            <Button
+                                flat
+                                modal="close"
+                                waves="light"
+                                className="grey-text text-darken-4"
+                            >
+                                Dismiss
+                </Button>
+                        </div>
                     }
                 >
                     <p>
@@ -120,6 +144,9 @@ export default class HospitalRecords extends Component{
                                 className="validate"
                                 placeholder="Enter OTP"
                             />
+                    <Rating id="rate"
+                        initialRating={2.5}
+                    />
                         </Col>
                         </Row>
                         {/* <Button
@@ -131,25 +158,6 @@ export default class HospitalRecords extends Component{
                             >
                                 Finish
                         </Button> */}
-                        <Button
-                                onClick={() => this.requestfinish(record)}
-                                flat
-                                modal="close"
-                                waves="light"
-                                className="grey-text text-darken-4"
-                            >
-                                Finish
-                        </Button>
-                        <Button
-                                
-                                flat
-                                modal="close"
-                                waves="light"
-                                className="grey-text text-darken-4"
-                            >
-                                Dismiss
-                        </Button>
-
                     </p>
                 </Modal>
                 <Row/>
@@ -191,7 +199,7 @@ export default class HospitalRecords extends Component{
                     <Col s={12} style={filler3} />
                 </Row>
                 <Row style={req_queue_style}>
-                    <Col s={10} offset="s1" className="center-align">
+                    <Col s={12}  className="center-align">
                         <ul>
                             {this.state.list.map((record) => this.renderList(record))}
                         </ul>

@@ -25,6 +25,7 @@ app.get('/login/:emailid',function(req,res){
         rating:3
     }
     usermap.push(obj)
+    res.send({"result":"done"})
 })
 
 app.post('/storerequest/:emailid',function(req,res){
@@ -250,6 +251,10 @@ app.get('/deleteRequest/:requestid',function(req,res){
         }
     }
     res.send({"result":"done"})
+})
+
+app.get('/storerating/:emailid/:rating',function(req,res){
+    console.log(req.params.rating)
 })
 
 
