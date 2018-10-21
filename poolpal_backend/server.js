@@ -207,6 +207,43 @@ app.get('/getotp/:reqid',function(req,res){
 })
 
 
+app.get('/getMyRequests/:emailid',function(req,res){
+    var l = requestmap.length
+    var id = req.params.emailid
+    var i
+    var result = []
+    for(i = 0 ; i < l  ; i++)
+    {
+        var temp = requestmap[i].id
+        if(requestmap[i].id==id)
+        {
+            result.push(requestmap[i])
+        }
+    }
+    console.log("My requests")
+    console.log(result)
+    res.send({"result":result})
+})
+
+app.get('/deleteRequest/:requestid',function(req,res){
+    var l = requestmap.length
+    var id = req.params.requestid
+    var i
+    var result = []
+    for(i = 0 ; i < l  ; i++)
+    {
+        var temp = requestmap[i].request_id
+        if(temp==id)
+        {
+            requestmap.splice(i,1);
+        }
+    }
+    res.send({"result":"done"})
+})
+
+
+
+
 
 
 

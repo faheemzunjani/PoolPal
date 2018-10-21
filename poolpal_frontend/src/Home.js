@@ -13,11 +13,12 @@ import {
     CardTitle
 } from "react-materialize";
 import Rating from "react-rating";
+
 const filler1 = {
-    height: "20%"
+    height: "10vh"
 };
 const filler2 = {
-    height: "15%"
+    height: "10vh"
 };
 export default class Home extends Component {
     constructor(props) {
@@ -29,14 +30,14 @@ export default class Home extends Component {
     }
     componentDidMount() {
         setInterval(async () => {
-            let response = await fetch(`http://localhost:5000/notifications/${this.props.match.params.id}`)
+            let response = await fetch(`http://192.168.0.2:5000/notifications/${this.props.match.params.id}`)
             let response_json = await response.json()
             let result = response_json.result;
             // console.log(result.length)
             // console.log(result)
             if (result.length != 0) {
                 var value = prompt("Your request has been accepted.Please make the required payment.")
-                let resp = await fetch(`http://localhost:5000/payment/${this.props.match.params.id}/${value}/${JSON.stringify(result[0])}`)
+                let resp = await fetch(`http://192.168.0.2:5000/payment/${this.props.match.params.id}/${value}/${JSON.stringify(result[0])}`)
                 let resp_json = await resp.json();
                 let rel = resp_json.result;
                 if (rel != undefined) {
@@ -56,6 +57,7 @@ export default class Home extends Component {
         this.props.history.push(`/tripview/${this.props.match.params.id}`)
     }
     render() {
+        
         return (
             <div >
                 <Navbar brand="Profile" right className="grey darken-4">
@@ -78,18 +80,25 @@ export default class Home extends Component {
                         <h5 className="grey-text text-darken-4">{this.props.match.params.id}</h5>
                     </Col>
                     <Col s={8} offset="s2" className="center-align">
-                        <Rating initialRating={3} readonly />
+                    <Rating 
+                        initialRating={2.5}
+                        readonly
+                    />
                     </Col>
                 </Row>
                 <Row style={filler2} />
                 <Row>
                     <Col s={12} className="center-align">
+                        <Col s={6}>
                         <Button onClick={this.requestClick} waves="light" className="grey darken-4">
                             Request<Icon left>add_circle_outline</Icon>
                         </Button>
+                        </Col>
+                        <Col s={6}>
                         <Button onClick={this.initiateTrip} waves="light" className="grey darken-4">
                             New Trip<Icon right>done_outline</Icon>
                         </Button>
+                        </Col>
                     </Col>
                 </Row>
             </div>

@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import styles2 from './css/HospitalRecords.module.css'
 import {
     Button,
     Icon,
@@ -49,7 +48,7 @@ export default class HospitalRecords extends Component{
     async getAcceptedRequests()
     {
         console.log("fetching requests")
-        let response = await fetch(`http://localhost:5000/getAcceptedRequests/${this.props.match.params.id}`)
+        let response = await fetch(`http://192.168.0.2:5000/getAcceptedRequests/${this.props.match.params.id}`)
         console.log("data received")
         let response_json = await response.json()
         var arr = response_json.result;
@@ -61,18 +60,18 @@ export default class HospitalRecords extends Component{
     componentDidMount()
     {
         this.getAcceptedRequests()
-        let resp = fetch(`http://localhost:5000/endtrip/${this.props.match.params.id}`)
+        let resp = fetch(`http://192.168.0.2:5000/endtrip/${this.props.match.params.id}`)
 
     }
 
     modifylist=(item)=>{
         console.log("in modifylist")
         var rec = JSON.stringify(item)
-        let response = fetch(`http://localhost:5000/requestAccepted/${this.props.match.params.id}/${rec}`)
+        let response = fetch(`http://192.168.0.2:5000/requestAccepted/${this.props.match.params.id}/${rec}`)
     }
     async requestfinish(record)
     {
-        let response = await fetch(`http://localhost:5000/getotp/${record.request_id}`)
+        let response = await fetch(`http://192.168.0.2:5000/getotp/${record.request_id}`)
         let resp_json = await response.json()
         var act_otp = resp_json.result
         var otp = document.getElementById('otp').value
@@ -183,7 +182,7 @@ export default class HospitalRecords extends Component{
     if (this.state.list != null) {
         return (
             <div>
-                <Navbar brand="Accepted Requests" right className="grey darken-4">
+                <Navbar brand="Accepted" right className="grey darken-4">
                 <NavItem href={'/home/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>Profile</NavItem>
                     <NavItem href={'/'}>Logout</NavItem>
                     <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>
@@ -203,7 +202,7 @@ export default class HospitalRecords extends Component{
     }
     return (
         <div>
-            <Navbar brand="Accepted Requests" right className="grey darken-4">
+            <Navbar brand="Accepted" className="grey darken-4">
             <NavItem href={'/home/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>Profile</NavItem>
                     <NavItem href={'/'}>Logout</NavItem>
                     <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles2 from './css/HospitalRecords.module.css'
 import {
     Button,
     Icon,
@@ -28,7 +27,10 @@ const filler4 = {
     height: "0.02%"
 };
 const filler5 = {
-    height: "2%"
+    height: "18vh"
+};
+const filler6 = {
+    height: "45vh"
 };
 const req_queue_style = {
     overflow: "auto"
@@ -49,7 +51,7 @@ export default class HospitalRecords extends Component {
 
     async getRequests() {
         console.log("fetching requests")
-        let response = await fetch(`http://localhost:5000/getRequests/${this.props.match.params.id}`)
+        let response = await fetch(`http://192.168.0.2:5000/getRequests/${this.props.match.params.id}`)
         console.log("data received")
         let response_json = await response.json()
         var arr = response_json.requests;
@@ -61,7 +63,7 @@ export default class HospitalRecords extends Component {
     componentDidMount() {
         this.getRequests()
         setInterval(async () => {
-            let response = await fetch(`http://localhost:5000/confirmations/${this.props.match.params.id}`)
+            let response = await fetch(`http://192.168.0.2:5000/confirmations/${this.props.match.params.id}`)
             let response_json = await response.json()
             var arr = response_json.result;
             // console.log(arr)
@@ -74,8 +76,8 @@ export default class HospitalRecords extends Component {
     modifylist = async (item) => {
         console.log("in modifylist")
         var rec = JSON.stringify(item)
-        let response = await fetch(`http://localhost:5000/requestAccepted/${this.props.match.params.id}/${rec}`)
-        let respons = await fetch(`http://localhost:5000/getRequests/${this.props.match.params.id}`)
+        let response = await fetch(`http://192.168.0.2:5000/requestAccepted/${this.props.match.params.id}/${rec}`)
+        let respons = await fetch(`http://192.168.0.2:5000/getRequests/${this.props.match.params.id}`)
         console.log("data received")
         let respons_json = await respons.json()
         var arr = respons_json.requests;
@@ -118,7 +120,10 @@ export default class HospitalRecords extends Component {
                         <Button style={fullwidthbutton} className="white black-text">{record.item}</Button>
                     }
                 >
-                    <p>Requester Name:{record.id}</p>
+                    <p><b>Requester Name:</b> {record.id}</p>
+                    <p><b>Request valid until:</b> {record.time}</p>
+                    <p><b>Location:</b> {record.area}</p>
+
                 </Modal>
                 <Row></Row>
                 {/* <CollapsibleItem header="Product Title">
@@ -177,11 +182,6 @@ export default class HospitalRecords extends Component {
                     </Row>
                     <Row style={filler5} />
                     <Row>
-                        <Col s={12} className="center-align">
-                            <Button waves="light" className="grey darken-4">
-                                View Accepted<Icon left>done_outline</Icon>
-                            </Button>
-                        </Col>
                         <Col s={12} style={filler5} />
                         <Col s={12} className="center-align">
                             <Button onClick={this.tripEnd} waves="light" className="grey darken-4">
@@ -194,12 +194,12 @@ export default class HospitalRecords extends Component {
         return (
             <div>
                 <Navbar brand="Requests" right className="grey darken-4">
-                    <NavItem href="#">Profile</NavItem>
+                <NavItem href={'/home/' + this.props.match.params.id + '/' + this.props.match.params.pwd}>Profile</NavItem>
                     <NavItem href="#">Logout</NavItem>
                     <NavItem href={'/myrequests/'+this.props.match.params.id+'/'+this.props.match.params.pwd}>My Requests</NavItem>
                 </Navbar>
                 <Row>
-                    <Col s={12} style={filler5} />
+                    <Col s={12} style={filler6} />
                     <Col s={12} className="center-align">
                         <Button onClick={this.tripEnd} waves="light" className="grey darken-4">
                             End Trip<Icon left>location_off</Icon>

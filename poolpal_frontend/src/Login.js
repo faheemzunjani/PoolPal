@@ -10,11 +10,11 @@ import {
     Col
 } from "react-materialize";
 const rowHeight1 = {
-    height: "15%"
+    height: "10vh"
 };
 
 const rowHeight2 = {
-    height: "20%"
+    height: "10vh"
 };
 export default class Login extends Component {
     constructor() {

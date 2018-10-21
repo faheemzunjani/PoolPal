@@ -37,11 +37,11 @@ export default class Login extends Component {
         e.preventDefault();
         var time = document.getElementById('time').value
         var item = document.getElementById('item').value
-        var area = document.getElementById('area').value
+        var area = document.getElementById('pac-input').value
         console.log(time)
         console.log(item)
         console.log(area)
-        fetch(`http://localhost:5000/storerequest/${this.props.match.params.id}`, {
+        fetch(`http://192.168.0.2:5000/storerequest/${this.props.match.params.id}`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -56,6 +56,7 @@ export default class Login extends Component {
         this.props.history.goBack()
     }
     componentDidMount() {
+        console.log(document.getElementById('map'))
         let map = new window.google.maps.Map(document.getElementById('map'), {
             center: { lat: 25.4358, lng: 81.8463 },
             zoom: 13,
@@ -130,7 +131,7 @@ export default class Login extends Component {
                 <Row style={rowHeight3} />
                 <form onSubmit={this.requestsend}>
                     <Row>
-                        <Col s={10} offset="s1">
+                        {/* <Col s={10} offset="s1">
                             <Input s={12} type="select" defaultValue="" id="area">
                                 <option value="" disabled>
                                     Pick Area
@@ -139,8 +140,18 @@ export default class Login extends Component {
                                 <option value="Zero Road">Zero Road</option>
                                 <option value="Jhalwa">Jhalwa</option>
                             </Input>
-                        </Col>
+                        </Col> */}
 
+                        
+                        <Col s={10} offset="s1">
+                            <Input
+                                s={12}
+                                id="item"
+                                type="text"
+                                className="validate"
+                                placeholder="Enter item required"
+                            />
+                        </Col>
                         <Col s={10} offset="s1">
                             <Input
                                 s={12}
@@ -149,15 +160,6 @@ export default class Login extends Component {
                                 id="time"
                                 placeholder="Request expires after"
                                 onChange={function (e, value) { }}
-                            />
-                        </Col>
-                        <Col s={10} offset="s1">
-                            <Input
-                                s={12}
-                                id="item"
-                                type="text"
-                                className="validate"
-                                placeholder="Enter item required"
                             />
                         </Col>
                     </Row>
