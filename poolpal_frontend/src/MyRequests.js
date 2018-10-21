@@ -120,6 +120,7 @@ export default class HospitalRecords extends Component {
                     <p><b>Requester Name:</b> {record.id}</p>
                     <p><b>Request valid until:</b> {record.time}</p>
                     <p><b>Location:</b> {record.area}</p>
+                    <p><b>Request OTP:</b>{record.otp}</p>
 
                 </Modal>
                 <Row></Row>

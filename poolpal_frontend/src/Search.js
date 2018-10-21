@@ -7,6 +7,7 @@ import TripView from './TripView'
 import TripEnd from './TripEnd'
 import CabPool from './CabPool'
 import MyRequests from './MyRequests'
+import AcceptedRequests from './AcceptedRequests'
 
 
 export default class Search extends Component {
@@ -42,6 +43,7 @@ export default class Search extends Component {
             <Route exact path='/tripend/:id' component={TripEnd} />
             <Route exact path='/cabpool/:id' component={CabPool} />
             <Route exact path='/myrequests/:id/:pwd' component={MyRequests}/>
+            <Route exact path='/acceptedrequests/:id/:pwd' component={AcceptedRequests}/>
             </div>
         )
     }

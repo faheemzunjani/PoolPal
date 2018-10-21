@@ -53,6 +53,7 @@ export default class Login extends Component {
                 "duration": time
             })
         })
+        alert("Request created successfully")
         this.props.history.goBack()
     }
     componentDidMount() {
