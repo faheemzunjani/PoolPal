@@ -15,6 +15,17 @@ var mongo = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/medical_blockchain"
 var requestmap = []
 var procurermap = []
+var usermap = []
+
+
+app.get('/login/:emailid',function(req,res){
+    var user = req.params.emailid
+    var obj = {
+        id:user,
+        rating:3
+    }
+    usermap.push(obj)
+})
 
 app.post('/storerequest/:emailid',function(req,res){
     var id = req.params.emailid;

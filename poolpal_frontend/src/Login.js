@@ -34,6 +34,7 @@ export default class Login extends Component {
         // console.log(result)
         // if(result!="Error")
         //{
+        let resp = await fetch(`http://192.168.0.2:5000/login/${id}`)
         this.props.history.push(`/home/${id}/${pwd}`)
 
         //}
